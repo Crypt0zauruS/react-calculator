@@ -44,6 +44,8 @@ p {
   border: 2px solid black;
   box-shadow: 0 0 20px #eee;
   border: none;
+  max-width: 270px;
+  min-width: 270px;
 }
 
 #title:hover {
@@ -53,7 +55,13 @@ p {
 }
 
 #display {
-  background: #b6b4b3;
+  min-height: 78px;
+  word-wrap: break-word;
+  line-height: normal;
+  padding-top: 22px;
+  padding: 20 0 10 10;
+  margin-top: -5px;
+  margin-bottom: 5px;
 }
 
 #title {
@@ -76,7 +84,9 @@ p {
 #clear,
 #back {
   margin-top: -15px;
+  margin-bottom: -7px;
 }
+
 a {
   margin: 20px;
 }

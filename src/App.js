@@ -1,13 +1,15 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { evaluate } from "mathjs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const initialState = "0";
   const [formula, setFormula] = useState("");
   const [display, setDisplay] = useState(initialState);
   const [isEvaluated, setIsEvaluated] = useState(false);
-
+  const plusRef = useRef(null);
   useEffect(() => {
     if (formula === "") {
       setDisplay(initialState);
@@ -20,7 +22,7 @@ function App() {
         setDisplay(formula);
       }
     }
-
+    console.log(formula);
     if (isEvaluated) {
       setIsEvaluated(false);
 
@@ -29,6 +31,32 @@ function App() {
       } else {
         setFormula(formula.slice(-1));
       }
+    }
+
+    if (formula.length > 25 && formula.length <= 26) {
+      toast.warn("Are you OK ? 😳😅", {
+        className: "toast-position",
+        theme: "dark",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
+    } else if (formula.length > 50 && formula.length <= 51) {
+      toast.error("What the Hell ? 🤣🤪🤯", {
+        className: "toast-position",
+        theme: "dark",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formula]);
@@ -41,6 +69,17 @@ function App() {
 
   useEffect(() => {
     setDisplay(initialState);
+    toast.success("Hi! Glad to see you workin' 🥸😃", {
+      className: "toast-position",
+      theme: "dark",
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
   }, []);
 
   const solve = () => {
@@ -57,13 +96,16 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <div className="container">
         <table id="calculator">
           <tbody>
             <tr>
               <td colSpan="3">
                 <p id="title">🦕 Crypt0zauruS' 🧮</p>
-                <p id="display">{display}</p>
+                <p className="fit" id="display">
+                  {display}
+                </p>
               </td>
 
               <td>
@@ -72,7 +114,9 @@ function App() {
                   id="clear"
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => setDisplay(initialState)}
+                  onClick={() => {
+                    setDisplay(initialState);
+                  }}
                 />
                 <hr />
                 <input
@@ -133,7 +177,17 @@ function App() {
                   type="button"
                   defaultValue="/"
                   onClick={() => {
-                    if (/[*+\-/.]/.test(formula.slice(-1))) {
+                    if (/[*+/.]/.test(formula.slice(-1))) {
+                      setFormula(formula.slice(0, -1) + "/");
+                    } else if (
+                      /-/.test(formula.slice(-1)) &&
+                      !/[0-9]/.test(formula.slice(-2))
+                    ) {
+                      setFormula(formula.slice(0, -2) + "/");
+                    } else if (
+                      /-/.test(formula.slice(-1)) &&
+                      /[0-9]/.test(formula.slice(-2))
+                    ) {
                       setFormula(formula.slice(0, -1) + "/");
                     } else {
                       setFormula(formula + "/");
@@ -189,7 +243,17 @@ function App() {
                   type="button"
                   defaultValue="*"
                   onClick={() => {
-                    if (/[*+\-/.]/.test(formula.slice(-1))) {
+                    if (/[*+/.]/.test(formula.slice(-1))) {
+                      setFormula(formula.slice(0, -1) + "*");
+                    } else if (
+                      /-/.test(formula.slice(-1)) &&
+                      !/[0-9]/.test(formula.slice(-2))
+                    ) {
+                      setFormula(formula.slice(0, -2) + "*");
+                    } else if (
+                      /-/.test(formula.slice(-1)) &&
+                      /[0-9]/.test(formula.slice(-2))
+                    ) {
                       setFormula(formula.slice(0, -1) + "*");
                     } else {
                       setFormula(formula + "*");
@@ -245,7 +309,22 @@ function App() {
                   type="button"
                   defaultValue="-"
                   onClick={() => {
-                    setFormula(formula + "-");
+                    if (/-/.test(formula.slice(-1))) {
+                      plusRef.current.click();
+                      toast.info("Be careful when writing your formula 🤓", {
+                        className: "toast-position",
+                        theme: "dark",
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                      });
+                    } else {
+                      setFormula(formula + "-");
+                    }
                   }}
                 />{" "}
               </td>
@@ -302,6 +381,7 @@ function App() {
                   id="add"
                   type="button"
                   defaultValue="+"
+                  ref={plusRef}
                   onClick={() => {
                     if (/[*+/.]/.test(formula.slice(-1))) {
                       setFormula(formula.slice(0, -1) + "+");
