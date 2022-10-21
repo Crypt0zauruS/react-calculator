@@ -26,7 +26,7 @@ function App() {
     if (formula === "") {
       setDisplay(initialState);
     } else {
-      if (/^[*+/]/.test(formula)) {
+      if (/^[*+/]/.test(formula) || formula.charAt(0) === ".") {
         setFormula("0" + formula);
         setDisplay("0" + formula);
       } else {
@@ -117,7 +117,7 @@ function App() {
                 <tr>
                   <td colSpan="3">
                     <p onClick={() => setIsDisplayed(!isDisplayed)} id="title">
-                      🧮 Click to show/hide roll
+                      🧮 Show/hide roll
                     </p>
 
                     <p id="display">{display}</p>
@@ -358,7 +358,7 @@ function App() {
                               }
                             );
                           }
-                        } else if (/./.test(formula.slice(-1))) {
+                        } else if (/\./.test(formula.slice(-1))) {
                           setFormula(formula.slice(0, -1) + "-");
                         } else {
                           setFormula(formula + "-");
