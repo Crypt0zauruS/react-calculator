@@ -59,7 +59,8 @@ p {
   word-wrap: break-word;
   line-height: normal;
   padding-top: 22px;
-  padding: 20 0 10 10;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-top: -5px;
   margin-bottom: 5px;
 }
