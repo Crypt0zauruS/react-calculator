@@ -17,6 +17,7 @@
 table {
   margin-left: auto;
   margin-right: auto;
+  z-index: 2;
 }
 
 input[type="button"] {
@@ -26,6 +27,11 @@ input[type="button"] {
   font-weight: bold;
   border: none;
   border-radius: 10px;
+  max-width: 90px;
+}
+
+#back {
+  padding-left: 17px;
 }
 
 p {
@@ -74,9 +80,7 @@ p {
 a {
   margin: 20px;
 }
-table {
-  z-index: 2;
-}
+
 .footer {
   color: #b6b4b3;
   text-align: center;
