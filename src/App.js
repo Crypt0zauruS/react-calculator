@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     setDisplay(initialState);
-    toast.success("Hi! Glad to see you workin' 🥸😃", {
+    toast.success("Hi ! Glad to see you workin ' 🥸😃", {
       className: "toast-position",
       theme: "dark",
       position: "top-right",
@@ -311,17 +311,31 @@ function App() {
                   onClick={() => {
                     if (/-/.test(formula.slice(-1))) {
                       plusRef.current.click();
-                      toast.info("Be careful when writing your formula 🤓", {
-                        className: "toast-position",
-                        theme: "dark",
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: false,
-                        progress: undefined,
-                      });
+                      if (!/[0-9]/.test(formula.slice(-2))) {
+                        toast.info("Be careful when writing your formula 🤓", {
+                          className: "toast-position",
+                          theme: "dark",
+                          position: "top-right",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: false,
+                          progress: undefined,
+                        });
+                      } else {
+                        toast.info("' -- ' has been converted to ' + ' 😺", {
+                          className: "toast-position",
+                          theme: "dark",
+                          position: "top-right",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: false,
+                          progress: undefined,
+                        });
+                      }
                     } else {
                       setFormula(formula + "-");
                     }

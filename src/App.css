@@ -88,6 +88,10 @@ p {
   margin-bottom: -7px;
 }
 
+#clear {
+  padding-left: 35px;
+}
+
 a {
   margin: 20px;
 }
