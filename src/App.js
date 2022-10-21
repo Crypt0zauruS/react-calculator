@@ -358,6 +358,8 @@ function App() {
                               }
                             );
                           }
+                        } else if (/./.test(formula.slice(-1))) {
+                          setFormula(formula.slice(0, -1) + "-");
                         } else {
                           setFormula(formula + "-");
                         }
