@@ -111,7 +111,7 @@ function App() {
       <ToastContainer />
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col calc">
             <table id="calculator">
               <tbody>
                 <tr>
