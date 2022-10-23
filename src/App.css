@@ -25,6 +25,7 @@ li {
   font-family: " Tahoma ";
   font-size: 1.2em;
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 #list-title {
@@ -80,14 +81,6 @@ li {
   scrollbar-gutter: stable;
   scrollbar-color: #69b3dd #b3dfe1;
   z-index: 3;
-}
-
-.roll::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.roll::-webkit-scrollbar-thumb {
-  background: rgba(255, 0, 0, 0.4);
 }
 
 input[type="button"] {
