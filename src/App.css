@@ -14,11 +14,10 @@
   height: 100vh;
 }
 
-table,
-.roll {
+.operations {
   margin-left: auto;
   margin-right: auto;
-  z-index: 2;
+  z-index: 3;
 }
 
 li {
@@ -33,24 +32,31 @@ li {
   font-style: italic;
 }
 
-.operations,
 .calc {
   animation: fade-in 0.5s ease-in;
+  z-index: 2;
 }
 
 @keyframes fade-in {
   0% {
-    opacity: 0;
     height: 0;
   }
   100% {
-    opacity: 1;
     height: 485px;
   }
 }
 
 .hidden {
   display: none;
+}
+
+.delayOpacity {
+  opacity: 0 !important;
+}
+
+.delayWidth {
+  min-width: 0px !important;
+  max-width: 0px !important;
 }
 
 .roll {
@@ -60,6 +66,8 @@ li {
     #0abfbc 51%,
     lightblue 100%
   );
+  transition-property: opacity, min-width, max-width;
+  transition-duration: 0.25s;
   min-height: 485px;
   max-height: 485px;
   min-width: 300px;
@@ -71,6 +79,7 @@ li {
   overflow-y: auto;
   scrollbar-gutter: stable;
   scrollbar-color: #69b3dd #b3dfe1;
+  z-index: 3;
 }
 
 .roll::-webkit-scrollbar-thumb {
@@ -204,5 +213,7 @@ a {
   }
   .roll {
     opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

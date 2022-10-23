@@ -13,14 +13,8 @@ function App() {
   const [isEvaluated, setIsEvaluated] = useState(false);
   const [Solved, setSolved] = useState([]);
   const plusRef = useRef(null);
-  const listRef = useRef();
-  const [isDisplayed, setIsDisplayed] = useState(false);
 
-  useEffect(() => {
-    isDisplayed
-      ? listRef.current.classList.remove("hidden")
-      : listRef.current.classList.add("hidden");
-  }, [isDisplayed]);
+  const [isDisplayed, setIsDisplayed] = useState(false);
 
   useEffect(() => {
     if (formula === "") {
@@ -444,8 +438,8 @@ function App() {
             </table>
           </div>
 
-          <div ref={listRef} className="col operations">
-            <Roll props={Solved} />
+          <div className="col operations">
+            <Roll listOp={Solved} display={isDisplayed} />
           </div>
         </div>
       </div>
