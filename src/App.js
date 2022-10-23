@@ -100,6 +100,27 @@ function App() {
     }
   };
 
+  const handleInputOp = (string) => {
+    if (/[*+/.]/.test(formula.slice(-1))) {
+      setFormula(formula.slice(0, -1) + string);
+    } else if (
+      /-/.test(formula.slice(-1)) &&
+      !/[0-9]/.test(formula.slice(-2))
+    ) {
+      setFormula(formula.slice(0, -2) + string);
+    } else if (/-/.test(formula.slice(-1)) && /[0-9]/.test(formula.slice(-2))) {
+      setFormula(formula.slice(0, -1) + string);
+    } else {
+      setFormula(formula + string);
+    }
+  };
+
+  const handleInputNum = (string) => {
+    if (formula.charAt(0) === "0" && formula.length < 2) {
+      setFormula(formula.slice(0, -1) + string);
+    } else setFormula(formula + string);
+  };
+
   return (
     <div className="App">
       <ToastContainer />
@@ -148,9 +169,7 @@ function App() {
                       type="button"
                       defaultValue="1"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "1");
-                        } else setFormula(formula + "1");
+                        handleInputNum("1");
                       }}
                     />{" "}
                   </td>
@@ -161,9 +180,7 @@ function App() {
                       type="button"
                       defaultValue="2"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "2");
-                        } else setFormula(formula + "2");
+                        handleInputNum("2");
                       }}
                     />{" "}
                   </td>
@@ -174,9 +191,7 @@ function App() {
                       type="button"
                       defaultValue="3"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "3");
-                        } else setFormula(formula + "3");
+                        handleInputNum("3");
                       }}
                     />{" "}
                   </td>
@@ -187,21 +202,7 @@ function App() {
                       type="button"
                       defaultValue="/"
                       onClick={() => {
-                        if (/[*+/.]/.test(formula.slice(-1))) {
-                          setFormula(formula.slice(0, -1) + "/");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          !/[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -2) + "/");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          /[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -1) + "/");
-                        } else {
-                          setFormula(formula + "/");
-                        }
+                        handleInputOp("/");
                       }}
                     />{" "}
                   </td>
@@ -214,9 +215,7 @@ function App() {
                       type="button"
                       defaultValue="4"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "4");
-                        } else setFormula(formula + "4");
+                        handleInputNum("4");
                       }}
                     />{" "}
                   </td>
@@ -227,9 +226,7 @@ function App() {
                       type="button"
                       defaultValue="5"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "5");
-                        } else setFormula(formula + "5");
+                        handleInputNum("5");
                       }}
                     />{" "}
                   </td>
@@ -240,9 +237,7 @@ function App() {
                       type="button"
                       defaultValue="6"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "6");
-                        } else setFormula(formula + "6");
+                        handleInputNum("6");
                       }}
                     />{" "}
                   </td>
@@ -253,23 +248,9 @@ function App() {
                       type="button"
                       defaultValue="*"
                       onClick={() => {
-                        if (/[*+/.]/.test(formula.slice(-1))) {
-                          setFormula(formula.slice(0, -1) + "*");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          !/[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -2) + "*");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          /[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -1) + "*");
-                        } else {
-                          setFormula(formula + "*");
-                        }
+                        handleInputOp("*");
                       }}
-                    />{" "}
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -280,9 +261,7 @@ function App() {
                       type="button"
                       defaultValue="7"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "7");
-                        } else setFormula(formula + "7");
+                        handleInputNum("7");
                       }}
                     />{" "}
                   </td>
@@ -293,9 +272,7 @@ function App() {
                       type="button"
                       defaultValue="8"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "8");
-                        } else setFormula(formula + "8");
+                        handleInputNum("8");
                       }}
                     />{" "}
                   </td>
@@ -306,9 +283,7 @@ function App() {
                       type="button"
                       defaultValue="9"
                       onClick={() => {
-                        if (formula.charAt(0) === "0" && formula.length < 2) {
-                          setFormula(formula.slice(0, -1) + "9");
-                        } else setFormula(formula + "9");
+                        handleInputNum("9");
                       }}
                     />{" "}
                   </td>
@@ -415,21 +390,7 @@ function App() {
                       defaultValue="+"
                       ref={plusRef}
                       onClick={() => {
-                        if (/[*+/.]/.test(formula.slice(-1))) {
-                          setFormula(formula.slice(0, -1) + "+");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          !/[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -2) + "+");
-                        } else if (
-                          /-/.test(formula.slice(-1)) &&
-                          /[0-9]/.test(formula.slice(-2))
-                        ) {
-                          setFormula(formula.slice(0, -1) + "+");
-                        } else {
-                          setFormula(formula + "+");
-                        }
+                        handleInputOp("+");
                       }}
                     />{" "}
                   </td>
