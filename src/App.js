@@ -94,14 +94,20 @@ function App() {
       const result = /\./.test(evaluate(formula))
         ? evaluate(formula).toFixed(6).replace(uselessZero, "")
         : evaluate(formula);
-      setSolved([...Solved, formula + " = " + result]);
-      setDisplay(result.toString());
+      setSolved([
+        ...Solved,
+        `${formula} = ${result === "" ? "Out of scope" : result}`,
+      ]);
+
+      setDisplay(result === "" ? "Out of scope ☠️" : result.toString());
       setIsEvaluated(true);
     }
   };
 
   const handleInputOp = (string) => {
-    if (/[*+/.]/.test(formula.slice(-1))) {
+    if (display.includes("Out of scope") || display.includes("Infinity")) {
+      return;
+    } else if (/[*+/.]/.test(formula.slice(-1))) {
       setFormula(formula.slice(0, -1) + string);
     } else if (
       /-/.test(formula.slice(-1)) &&
@@ -294,7 +300,12 @@ function App() {
                       type="button"
                       defaultValue="-"
                       onClick={() => {
-                        if (/-/.test(formula.slice(-1))) {
+                        if (
+                          display.includes("Out of scope") ||
+                          display.includes("Infinity")
+                        ) {
+                          return;
+                        } else if (/-/.test(formula.slice(-1))) {
                           plusRef.current.click();
                           if (!/[0-9]/.test(formula.slice(-2))) {
                             toast.info(
