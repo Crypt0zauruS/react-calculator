@@ -368,16 +368,21 @@ function App() {
                       type="button"
                       defaultValue="."
                       onClick={() => {
-                        if (!/\./.test(formula.slice(-1))) {
+                        if (!/\./.test(formula.slice(-1)) && !isEvaluated) {
                           if (/[0-9]/.test(formula.slice(-1))) {
                             const regex = /^.+[+*/-]/;
                             const temp = formula.replace(regex, "");
                             if (!/\./.test(temp)) {
                               setFormula(formula + ".");
                             }
-                          } else if (!formula.slice(-1)) {
+                          } else if (
+                            !formula.slice(-1) ||
+                            /[*+/-]/.test(formula.slice(-1))
+                          ) {
                             setFormula("0.");
                           }
+                        } else if (isEvaluated) {
+                          setFormula("0.");
                         }
                       }}
                     />{" "}
