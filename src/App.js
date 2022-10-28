@@ -375,11 +375,10 @@ function App() {
                             if (!/\./.test(temp)) {
                               setFormula(formula + ".");
                             }
-                          } else if (
-                            !formula.slice(-1) ||
-                            /[*+/-]/.test(formula.slice(-1))
-                          ) {
+                          } else if (!formula.slice(-1)) {
                             setFormula("0.");
+                          } else if (/[*+/-]/.test(formula.slice(-1))) {
+                            setFormula(formula + "0.");
                           }
                         } else if (isEvaluated) {
                           setFormula("0.");
